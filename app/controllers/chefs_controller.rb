@@ -5,8 +5,12 @@ class ChefsController < ApplicationController
 
   def update
     @chef = Chef.find(params[:id])
-    @dish = Dish.find(params[:dish_id])
-    @chef.dishes << @dish
+    @dish = Dish.find_by(id: params[:dish_id])
+    if @dish.present?
+      @chef.dishes << @dish
+    else
+      flash[:alert] = "Error: Dish ID Must Exist"
+    end
 
     redirect_to chef_path(@chef)
   end

@@ -45,6 +45,11 @@ RSpec.describe 'chefs show page' do
 
       expect(current_path).to eq(chef_path(@chef_1))
       expect(page).to have_content(@dish_3.name)
+
+      click_on('Add Dish')
+
+      expect(page).to have_content("Error")
+      expect(current_path).to eq(chef_path(@chef_1))
     end
   end
 end
