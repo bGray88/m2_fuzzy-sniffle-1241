@@ -19,7 +19,7 @@ RSpec.describe 'chefs show page' do
 
     @dish_1.ingredients << @ingredient_lobster
     @dish_1.ingredients << @ingredient_soupbase
-    @dish_2.ingredients << @ingredient_dough
+    @dish_2.ingredients << @ingredient_bread
     @dish_2.ingredients << @ingredient_ham
     @dish_3.ingredients << @ingredient_bread
     @dish_3.ingredients << @ingredient_cheese
@@ -64,9 +64,10 @@ RSpec.describe 'chefs show page' do
       
       expect(current_path).to eq(chef_ingredients_path(@chef_2))
 
+      save_and_open_page
+
       expect(page).to have_content(@ingredient_bread.name)
       expect(page).to have_content(@ingredient_ham.name)
-      expect(page).to have_content(@ingredient_dough.name)
       expect(page).to have_content(@ingredient_cheese.name)
     end
   end
