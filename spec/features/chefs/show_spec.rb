@@ -12,17 +12,19 @@ RSpec.describe 'chefs show page' do
     @ingredient_soupbase = Ingredient.create!(name: "Soup", calories: 1000)
     @ingredient_cheese = Ingredient.create!(name: "Cheese", calories: 1500)
     @ingredient_ham = Ingredient.create!(name: "Ham", calories: 2000)
-    @ingredient_bread = Ingredient.create!(name: "Bread", calories: 1000)
+    @ingredient_dough = Ingredient.create!(name: "Dough", calories: 1000)
     @ingredient_tortilla = Ingredient.create!(name: "Tortilla", calories: 800)
+    @ingredient_bread = Ingredient.create!(name: "Bread", calories: 1000)
+    @ingredient_cheddar = Ingredient.create!(name: "Cheddar Cheese", calories: 1500)
 
     @dish_1.ingredients << @ingredient_lobster
     @dish_1.ingredients << @ingredient_soupbase
-    @dish_2.ingredients << @ingredient_bread
+    @dish_2.ingredients << @ingredient_dough
     @dish_2.ingredients << @ingredient_ham
     @dish_3.ingredients << @ingredient_bread
     @dish_3.ingredients << @ingredient_cheese
     @dish_4.ingredients << @ingredient_tortilla
-    @dish_4.ingredients << @ingredient_cheese
+    @dish_4.ingredients << @ingredient_cheddar
   end
 
   describe 'As a visitor, show page, lists chef\’s name' do
@@ -53,6 +55,7 @@ RSpec.describe 'chefs show page' do
     end
 
     it 'has a link to view a list of all ingredients that this chef uses in their dishes' do
+      @chef_2.dishes << @dish_2
       visit chef_path(@chef_2)
 
       expect(page).to have_link("Used Ingredients")
@@ -62,6 +65,8 @@ RSpec.describe 'chefs show page' do
       expect(current_path).to eq(chef_ingredients_path(@chef_2))
 
       expect(page).to have_content(@ingredient_bread.name)
+      expect(page).to have_content(@ingredient_ham.name)
+      expect(page).to have_content(@ingredient_dough.name)
       expect(page).to have_content(@ingredient_cheese.name)
     end
   end
