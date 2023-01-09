@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
   before(:each) do
-    @chef_1 = Chef.create!("Wolfgang")
-    @dish_1 = Dish.create!("Lobster Bisque")
-    @ingredient_lobster = Ingredient.create!("Lobster", 500)
-    @ingredient_soupbase = Ingredient.create!("Soup", 1000)
+    @chef_1 = Chef.create!(name: "Wolfgang")
+    @dish_1 = Dish.create!(name: "Lobster Bisque", description: "Bold saucy ocean insect", chef: @chef_1)
+    @ingredient_lobster = Ingredient.create!(name: "Lobster", calories: 500)
+    @ingredient_soupbase = Ingredient.create!(name: "Soup", calories: 1000)
   end
 
   describe 'As a visitor, show page, lists dish\’s name and description' do
