@@ -51,5 +51,15 @@ RSpec.describe 'chefs show page' do
       expect(page).to have_content("Error")
       expect(current_path).to eq(chef_path(@chef_1))
     end
+
+    it 'has a link to view a list of all ingredients that this chef uses in their dishes' do
+      visit chef_path(@chef_1)
+
+      expect(page).to have_link("Used Ingredients")
+
+      click_on("Used ingredients")
+      
+      expect(current_path).to eq(chef_ingredients_path(@chef_1))
+    end
   end
 end
