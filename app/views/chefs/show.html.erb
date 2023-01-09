@@ -5,3 +5,9 @@
     <li><%= dish.name %></li>
   </ul>
 <% end %>
+
+<%= form_with model: @dish, method: :patch, local: true do |form| %>
+  <%= form.label :dish_id %>
+  <%= form.text_field :dish_id %>
+  <%= form.submit 'Add Dish' %>
+<% end %>
