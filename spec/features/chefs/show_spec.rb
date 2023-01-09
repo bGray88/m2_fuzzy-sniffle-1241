@@ -34,5 +34,17 @@ RSpec.describe 'chefs show page' do
       expect(page).to have_content(@dish_2.name)
       expect(page).to have_content(@dish_4.name)
     end
+
+    it 'has a form to add an existing dish' do
+      visit chef_path(@chef_1)
+
+      expect(page).to have_field('dish_id')
+
+      fill_in('dish_id', with: @dish_3.id)
+      click_on('Add Dish')
+
+      expect(current_path).to eq(chef_path(@chef_1))
+      expect(page).to have_content(@dish_3.name)
+    end
   end
 end
