@@ -6,6 +6,9 @@ RSpec.describe 'dishes show page' do
     @dish_1 = Dish.create!(name: "Lobster Bisque", description: "Bold saucy ocean insect", chef: @chef_1)
     @ingredient_lobster = Ingredient.create!(name: "Lobster", calories: 500)
     @ingredient_soupbase = Ingredient.create!(name: "Soup", calories: 1000)
+
+    @dish_1.ingredients << @ingredient_lobster
+    @dish_1.ingredients << @ingredient_soupbase
   end
 
   describe 'As a visitor, show page, lists dish\’s name and description' do

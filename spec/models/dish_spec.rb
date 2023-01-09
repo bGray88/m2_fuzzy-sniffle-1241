@@ -9,4 +9,27 @@ RSpec.describe Dish, type: :model do
     it {should belong_to :chef}
     it {should have_many :ingredients}
   end
+
+  describe 'instance methods' do
+    before(:each) do
+      @chef_1 = Chef.create!(name: "Wolfgang")
+      @dish_1 = Dish.create!(name: "Lobster Bisque", description: "Bold saucy ocean insect", chef: @chef_1)
+      @ingredient_lobster = Ingredient.create!(name: "Lobster", calories: 500)
+      @ingredient_soupbase = Ingredient.create!(name: "Soup", calories: 1000)
+      @ingredient_onions = Ingredient.create!(name: "Soup", calories: 20)
+
+      @dish_1.ingredients << @ingredient_lobster
+      @dish_1.ingredients << @ingredient_soupbase
+    end
+
+    describe '#total_calories' do
+      it 'returns the total combined ingredient calories for a dish' do
+        expect(@dish_1.total_calories).to eq(1500)
+
+        @dish_1.ingredients << @ingredient_onions
+
+        expect(@dish_1.total_calories).to eq(1520)
+      end
+    end
+  end
 end
